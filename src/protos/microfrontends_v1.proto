@@ -1,0 +1,99 @@
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "pip-services.users.microfrontends.version1";
+option java_outer_classname = "MicrofrontendsProtoV1";
+option objc_class_prefix = "MICROFRONTENDS_CMD_V1";
+
+package microfrontends_v1;
+
+message ErrorDescription {
+  string type = 1;
+  string category = 2;
+  string code = 3;
+  string correlation_id = 4;
+  string status = 5;
+  string message = 6;
+  string cause = 7;
+  string stack_trace = 8;
+  map<string, string> details = 9;
+}
+
+message PagingParams {
+    int64 skip = 1;
+    int32 take = 2;
+    bool total = 3;
+}
+
+message Microfrontend {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    string path_prefix = 4;
+    string icon = 5;
+    string type = 6;
+    string remote_entry = 7;
+    string exposed_module = 8;
+    string element_name = 9;
+    map <string, string>  params = 10;
+}
+
+message MicrofrontendPage {
+    int64 total = 1;
+    repeated Microfrontend data = 2;
+}
+
+// The microfrontends service definition.
+service Microfrontends {
+  rpc get_microfrontends (MicrofrontendPageRequest) returns (MicrofrontendPageReply) {}
+  rpc get_microfrontend_by_id (MicrofrontendIdRequest) returns (MicrofrontendObjectReply) {}
+  rpc create_microfrontend (MicrofrontendObjectRequest) returns (MicrofrontendObjectReply) {}
+  rpc update_microfrontend (MicrofrontendObjectRequest) returns (MicrofrontendObjectReply) {}
+  rpc delete_microfrontend_by_id (MicrofrontendIdRequest) returns (MicrofrontendObjectReply) {}
+}
+
+// The request message containing the microfrontend page request.
+message MicrofrontendPageRequest {
+  string correlation_id = 1;
+  map<string, string> filter = 2;
+  PagingParams paging = 3;
+}
+
+// The response message containing the microfrontend page response
+message MicrofrontendPageReply {
+  ErrorDescription error = 1;
+  MicrofrontendPage page = 2;
+}
+
+// The request message containing the microfrontend id request.
+message MicrofrontendIdRequest {
+  string correlation_id = 1;
+  string microfrontend_id = 2;
+}
+
+// The request message containing the microfrontend object request.
+message MicrofrontendObjectRequest {
+  string correlation_id = 1;
+  Microfrontend microfrontend = 2;
+}
+
+// The response message containing the microfrontend object response
+message MicrofrontendObjectReply {
+  ErrorDescription error = 1;
+  Microfrontend microfrontend = 2;
+}
+
