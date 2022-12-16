@@ -67,7 +67,7 @@
     port: 8080
 
 # HTTP endpoint version 1.0
-- descriptor: "service-microfrontends:service:http:default:1.0"
+- descriptor: "service-microfrontends:service:commandable-http:default:1.0"
 
 # Heartbeat service
 - descriptor: "pip-services:heartbeat-service:http:default:1.0"

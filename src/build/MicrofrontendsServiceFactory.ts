@@ -5,7 +5,7 @@ import { MicrofrontendsMongoDbPersistence } from '../persistence/MicrofrontendsM
 import { MicrofrontendsFilePersistence } from '../persistence/MicrofrontendsFilePersistence';
 import { MicrofrontendsMemoryPersistence } from '../persistence/MicrofrontendsMemoryPersistence';
 import { MicrofrontendsController } from '../logic/MicrofrontendsController';
-import { MicrofrontendsHttpServiceV1 } from '../services/version1/MicrofrontendsHttpServiceV1';
+import { MicrofrontendsCommandableHttpServiceV1 } from '../services/version1/MicrofrontendsCommandableHttpServiceV1';
 import { MicrofrontendsCommandableGrpcServiceV1 } from '../services/version1/MicrofrontendsCommandableGrpcServiceV1';
 import { MicrofrontendsGrpcServiceV1 } from '../services/version1/MicrofrontendsGrpcServiceV1';
 
@@ -15,7 +15,7 @@ export class MicrofrontendsServiceFactory extends Factory {
 	public static FilePersistenceDescriptor = new Descriptor("service-microfrontends", "persistence", "file", "*", "1.0");
 	public static MongoDbPersistenceDescriptor = new Descriptor("service-microfrontends", "persistence", "mongodb", "*", "1.0");
 	public static ControllerDescriptor = new Descriptor("service-microfrontends", "controller", "default", "*", "1.0");
-	public static HttpServiceDescriptor = new Descriptor("service-microfrontends", "service", "http", "*", "1.0");
+	public static HttpServiceDescriptor = new Descriptor("service-microfrontends", "service", "commandable-http", "*", "1.0");
 	public static CommandableGrpcServiceDescriptor = new Descriptor("service-microfrontends", "service", "commandable-grpc", "*", "1.0");
 	public static GrpcServiceDescriptor = new Descriptor("service-microfrontends", "service", "grpc", "*", "1.0");
 	
@@ -25,7 +25,7 @@ export class MicrofrontendsServiceFactory extends Factory {
 		this.registerAsType(MicrofrontendsServiceFactory.FilePersistenceDescriptor, MicrofrontendsFilePersistence);
 		this.registerAsType(MicrofrontendsServiceFactory.MongoDbPersistenceDescriptor, MicrofrontendsMongoDbPersistence);
 		this.registerAsType(MicrofrontendsServiceFactory.ControllerDescriptor, MicrofrontendsController);
-		this.registerAsType(MicrofrontendsServiceFactory.HttpServiceDescriptor, MicrofrontendsHttpServiceV1);
+		this.registerAsType(MicrofrontendsServiceFactory.HttpServiceDescriptor, MicrofrontendsCommandableHttpServiceV1);
 		this.registerAsType(MicrofrontendsServiceFactory.CommandableGrpcServiceDescriptor, MicrofrontendsCommandableGrpcServiceV1);
 		this.registerAsType(MicrofrontendsServiceFactory.GrpcServiceDescriptor, MicrofrontendsGrpcServiceV1);
 	}

@@ -8,7 +8,7 @@ import { References } from 'pip-services3-commons-nodex';
 import { MicrofrontendV1 } from '../../../src/data/version1/MicrofrontendV1';
 import { MicrofrontendsMemoryPersistence } from '../../../src/persistence/MicrofrontendsMemoryPersistence';
 import { MicrofrontendsController } from '../../../src/logic/MicrofrontendsController';
-import { MicrofrontendsHttpServiceV1 } from '../../../src/services/version1/MicrofrontendsHttpServiceV1';
+import { MicrofrontendsCommandableHttpServiceV1 } from '../../../src/services/version1/MicrofrontendsCommandableHttpServiceV1';
 
 let httpConfig = ConfigParams.fromTuples(
     "connection.protocol", "http",
@@ -41,21 +41,21 @@ let MICROFRONTEND2: MicrofrontendV1 = {
     params: {}
 };
 
-suite('MicrofrontendsHttpServiceV1', ()=> {    
-    let service: MicrofrontendsHttpServiceV1;
+suite('MicrofrontendsCommandableHttpServiceV1', ()=> {    
+    let service: MicrofrontendsCommandableHttpServiceV1;
     let rest: any;
 
     suiteSetup(async () => {
         let persistence = new MicrofrontendsMemoryPersistence();
         let controller = new MicrofrontendsController();
 
-        service = new MicrofrontendsHttpServiceV1();
+        service = new MicrofrontendsCommandableHttpServiceV1();
         service.configure(httpConfig);
 
         let references: References = References.fromTuples(
             new Descriptor('service-microfrontends', 'persistence', 'memory', 'default', '1.0'), persistence,
             new Descriptor('service-microfrontends', 'controller', 'default', 'default', '1.0'), controller,
-            new Descriptor('service-microfrontends', 'service', 'http', 'default', '1.0'), service
+            new Descriptor('service-microfrontends', 'service', 'commandable-http', 'default', '1.0'), service
         );
         controller.setReferences(references);
         service.setReferences(references);
