@@ -19,7 +19,7 @@ Example **config.yaml** file:
 
 - descriptor: "service-microfrontends:controller:default:default:1.0"
 
-- descriptor: "service-microfrontends:service:http:default:1.0"
+- descriptor: "service-microfrontends:service:commandable-http:default:1.0"
   connection:
     protocol: "http"
     host: "0.0.0.0"
